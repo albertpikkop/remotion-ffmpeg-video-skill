@@ -53,6 +53,8 @@ the rendered candidate. Project-specific skills and the nearest `AGENTS.md` rema
 ## Non-negotiable media rules
 
 - Never guess fps, duration, orientation, stream order, channel layout, or colour characteristics.
+  When a fact cannot be read from the file or the brief, write `[PENDING: what would settle it]`
+  and stop; a receipt with a visible gap beats a render built on a guess.
 - Assigning Rec.709 tags does not convert HDR/HLG/PQ pixels to Rec.709. Perform and verify a real
   transform when the delivery contract requires one.
 - Do not let independent video and audio padding conceal a sync error. Repair the shared timeline.
@@ -66,4 +68,6 @@ the rendered candidate. Project-specific skills and the nearest `AGENTS.md` rema
 Return the source inventory, composition ID and props or FFmpeg command, output path, relevant
 version/lock information, SHA-256 for an immutable candidate, probe/decode receipt, sampled-frame
 paths, repaired defects, and one of `ready`, `not ready`, or `blocked`. State explicitly whether any
-platform action occurred.
+platform action occurred. Then run the check from the `tce` skill on the candidate against the
+delivery contract: invented, each check met or not met or [PENDING], assumed without being told,
+why, the fix, and the one line to add to the next brief.
