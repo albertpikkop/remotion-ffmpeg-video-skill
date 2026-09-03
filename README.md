@@ -1,7 +1,8 @@
-# GrowTricity Student Skills
+# remotion-ffmpeg-video
 
-Agent skills for building real projects. This repository installs one skill,
-`remotion-ffmpeg-video`, so the command below adds that one skill, not a collection.
+An agent skill for building, rendering and verifying programmatic video with Remotion and FFmpeg.
+This repository installs that one skill. It was first published as `growtricity-student-skills`;
+that name still redirects here.
 
 **Level, plainly:** the rules inside are professional-grade (colour tags, frame timing, lossless
 intermediates, verified renders). You do not need to know those words; the agent does. What you
@@ -20,7 +21,7 @@ inspecting and validating files.
 ## Install
 
 ```bash
-npx skills add albertpikkop/growtricity-student-skills -g
+npx skills add albertpikkop/remotion-ffmpeg-video-skill -g
 ```
 
 Remove `-g` if you want the skill only in the current project.
