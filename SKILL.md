@@ -68,6 +68,6 @@ the rendered candidate. Project-specific skills and the nearest `AGENTS.md` rema
 Return the source inventory, composition ID and props or FFmpeg command, output path, relevant
 version/lock information, SHA-256 for an immutable candidate, probe/decode receipt, sampled-frame
 paths, repaired defects, and one of `ready`, `not ready`, or `blocked`. State explicitly whether any
-platform action occurred. Then run the check from the `tce` skill on the candidate against the
+platform action occurred. Then run the check from the `noguess` skill (students say "TCE this"; `/tce` is its alias) on the candidate against the
 delivery contract: invented, each check met or not met or [PENDING], assumed without being told,
 why, the fix, and the one line to add to the next brief.

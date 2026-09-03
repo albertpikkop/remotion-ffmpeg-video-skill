@@ -34,13 +34,13 @@ Use $remotion-ffmpeg-video to build and verify this video: [describe the video a
 
 ## The method underneath
 
-The skill follows the TCE + NHA loop ([albertpikkop/tce-skill](https://github.com/albertpikkop/tce-skill)):
+The skill follows the TCE + NHA loop ([albertpikkop/noguess](https://github.com/albertpikkop/noguess)):
 it locks a delivery contract before rendering, marks any media fact it cannot read as [PENDING]
 instead of guessing, and ends with a check of the produced file against that contract. Install
 `tce` first and both skills share one loop:
 
 ```bash
-npx skills add albertpikkop/tce-skill
+npx skills add albertpikkop/noguess
 ```
 
 The same `npx skills add` commands work for Claude Code, Codex and Cursor.
