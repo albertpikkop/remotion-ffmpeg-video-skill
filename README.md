@@ -37,7 +37,7 @@ Use $remotion-ffmpeg-video to build and verify this video: [describe the video a
 The skill follows the TCE + NHA loop ([albertpikkop/noguess](https://github.com/albertpikkop/noguess)):
 it locks a delivery contract before rendering, marks any media fact it cannot read as [PENDING]
 instead of guessing, and ends with a check of the produced file against that contract. Install
-`tce` first and both skills share one loop:
+`noguess` first and both skills share one loop:
 
 ```bash
 npx skills add albertpikkop/noguess
