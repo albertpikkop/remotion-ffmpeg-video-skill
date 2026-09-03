@@ -1,6 +1,0 @@
-interface:
-  display_name: "Build My First CRM"
-  short_description: "Build a first CRM from a business plan"
-  default_prompt: "Use $build-first-crm to build my first CRM from this business plan."
-policy:
-  allow_implicit_invocation: true

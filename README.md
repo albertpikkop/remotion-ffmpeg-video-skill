@@ -2,83 +2,43 @@
 
 Beginner-friendly agent skills for building real projects with Codex.
 
-This repository contains two independent skills. Install only the one you need.
+This repository currently contains one standalone skill: `remotion-ffmpeg-video`.
 
-## Skills
+The First CRM skill lives separately at
+[albertpikkop/first-crm-skill](https://github.com/albertpikkop/first-crm-skill).
 
-### Build My First CRM
+## Remotion + FFmpeg Video
 
-Turn an approved business plan into a small working CRM:
+Build, edit, render and verify reproducible programmatic videos. The skill helps choose between
+Remotion, FFmpeg or a hybrid workflow and includes a deterministic media-audit script for
+inspecting and validating files.
 
-```text
-Landing page -> enquiry form -> Supabase -> operator login -> enquiry list
-```
-
-The skill is designed for non-technical students. It checks what is installed, explains missing
-connections in plain language, verifies Supabase cost before creating a project, and asks before
-external account changes or deployment.
-
-### Remotion + FFmpeg Video
-
-Build, edit, render and verify reproducible programmatic videos. It helps choose between Remotion,
-FFmpeg or a hybrid workflow and includes a media-audit script for inspecting and validating files.
-
-## See what is available
+## Install
 
 ```bash
-npx skills add albertpikkop/growtricity-student-skills --list
-```
-
-## Install one skill
-
-Install the CRM skill:
-
-```bash
-npx skills add albertpikkop/growtricity-student-skills --skill build-first-crm -g
-```
-
-Install the video skill:
-
-```bash
-npx skills add albertpikkop/growtricity-student-skills --skill remotion-ffmpeg-video -g
+npx skills add albertpikkop/growtricity-student-skills -g
 ```
 
 Remove `-g` if you want the skill only in the current project.
 
-## Try it
-
-For the CRM:
-
-```text
-Use $build-first-crm to build my first CRM from this business plan: [paste or attach the plan].
-```
-
-For video:
+## Use
 
 ```text
 Use $remotion-ffmpeg-video to build and verify this video: [describe the video and provide its files].
 ```
 
-The skill will ask for confirmation before consequential external changes. Installing a skill does
-not authorize it to create a paid project, connect an account, publish a site, upload a video or
-spend money.
+## Beginner exercise
 
-## Beginner exercises
-
-- [Exercise 1: Build a first CRM](exercises/01-build-first-crm.md)
-- [Exercise 2: Make and verify a programmatic video](exercises/02-remotion-ffmpeg-video.md)
+Follow [EXERCISE.md](EXERCISE.md) to create and verify a six-second vertical video without
+publishing it.
 
 ## Requirements
 
 - An agent that supports `SKILL.md`, such as Codex.
-- The CRM workflow needs the Supabase and Sites capabilities connected in the student's agent.
-  If either is unavailable, the skill stops and asks before using a supported installation or
-  connection flow.
-- The video workflow needs FFmpeg for media inspection and rendering, and Node.js plus Remotion for
-  Remotion projects.
+- FFmpeg for media inspection and rendering.
+- Node.js and Remotion when the project uses Remotion.
 
-Each student should use their own Supabase project. Do not put different students' customer data in
-one shared classroom database.
+Rendering a video does not authorize upload, publication, scheduling or spend.
 
 ## Licence
 
