@@ -32,7 +32,9 @@ contract below is for a delivery render or a first build.
 ## Stage 0: the machine, before the video
 
 Run these checks and stop at the first gap with the one install command for their system
-(the full list is in `SETUP.md` at the repo root). Ask before installing anything: "I will
+(the full list is in `SETUP.md` at the repo root). If you are not running on the person's
+own machine, do not report your machine's answers as theirs: give them the four check
+commands for their system and wait. Ask before installing anything: "I will
 install X (about Y MB). Ok?"
 
 1. `ffmpeg -version` and `ffprobe -version`. Missing: Mac `brew install ffmpeg`; Windows
@@ -51,12 +53,17 @@ install X (about Y MB). Ok?"
 
 Write every command on one line, with double quotes, so it pastes into PowerShell, cmd and
 a Mac terminal alike. Before writing into an existing project, list which files will change
-and wait for a yes.
+and wait for a yes. `BUSINESS-TRUTH.md` is the exception: updating it is always allowed,
+because it is the loop's memory, and every skill in the kit writes to it.
 
 ## Stage 1: the brief
 
 Read `BUSINESS-TRUTH.md` if it exists: the business name, the offer, the phone number, the
-colours and the page address come from there, never retyped. Then the delivery contract.
+colours and the page address come from there, never retyped. If the file describes a
+different business from the one the person is talking about, say so in one line, use
+nothing from it, and ask which is right before going on. If a fact the video needs is
+[PENDING] in the file (the WhatsApp number), the video cannot be `ready` until the person
+supplies it; ask for that one fact. Then the delivery contract.
 For a beginner who did not specify, use this contract and label every line Assumption:
 
 ```text
@@ -66,7 +73,8 @@ media, no logo unless supplied.
 ```
 
 Ask at most three questions, one ask each, only ones that change the video (which product,
-which line of text, which colour if none is approved). Never guess a fact you could read
+which line of text, which colour if none is approved). Every other unknown becomes a labelled
+Assumption, not a fourth question. Never guess a fact you could read
 from a supplied file: fps, duration, orientation, colour tags of a source clip come from
 `media_audit.py`, and a fact it cannot read is `[PENDING: what would settle it]`. A fact
 about the brief that nobody gave is an Assumption, written down, not a stop.
