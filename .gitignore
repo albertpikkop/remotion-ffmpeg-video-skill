@@ -8,3 +8,5 @@ out/
 *.mp4
 *.mov
 *.audit.json
+__pycache__/
+*.pyc

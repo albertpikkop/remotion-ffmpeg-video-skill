@@ -150,18 +150,21 @@ def audit(media: Path, *, decode: bool, include_sha256: bool) -> tuple[dict[str,
             "-",
         ])
         errors = [line for line in decode_result.stderr.splitlines() if line.strip()]
+        # FFmpeg exits 0 on concealed decode errors; a clean decode means zero error lines too.
+        decode_passed = decode_result.returncode == 0 and not errors
         decode_receipt = {
             "requested": True,
-            "passed": decode_result.returncode == 0,
+            "passed": decode_passed,
             "errors": errors,
         }
-        if decode_result.returncode != 0:
+        if not decode_passed:
             exit_code = 2
 
     format_info = raw.get("format") or {}
     payload: dict[str, Any] = {
         "schema_version": 1,
-        "status": "PASS" if exit_code == 0 else "FAIL",
+        # PASS only when the file was decoded end to end; a probe alone proves nothing about playback.
+        "status": ("PASS" if exit_code == 0 else "FAIL") if decode else "PROBED",
         "media": str(media.resolve()),
         "file_size_bytes": media.stat().st_size,
         "sha256": _sha256(media) if include_sha256 else None,
@@ -201,9 +204,9 @@ def main() -> int:
 
     try:
         payload, exit_code = audit(media, decode=args.decode, include_sha256=args.sha256)
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
         if args.output:
             _write_json(args.output.expanduser(), payload, args.overwrite)
-        print(json.dumps(payload, indent=2, ensure_ascii=False))
         return exit_code
     except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as exc:
         print(json.dumps({"status": "ERROR", "error": str(exc)}), file=sys.stderr)
