@@ -26,8 +26,9 @@ language the person wrote in. No em-dashes in text you write.
 ## When to stand down
 
 A small, reversible edit the person wants now (trim two seconds, swap a title, convert a
-file): do it, verify the output with one decode, and give a three-line receipt. The full
-contract below is for a delivery render or a first build.
+file): still run check 1 below (is FFmpeg there), then do it, verify the output with one
+decode, and give a three-line receipt. The full contract below is for a delivery render or
+a first build.
 
 ## Stage 0: the machine, before the video
 
@@ -43,7 +44,8 @@ install X (about Y MB). Ok?"
 3. Python: `python3 --version` on Mac, `py -3 --version` on Windows. Missing on Windows:
    `winget install Python.Python.3.12`.
 4. A Remotion project. If the folder has no `package.json`, scaffold one without prompts:
-   `npx create-video@latest <folder> --blank`, then `npm install` inside it, then
+   `npx create-video@latest --yes --blank <folder>` (the `--yes` is what stops the
+   interactive menu; run it outside any git repository), then `npm install` inside it, then
    `npx remotion browser ensure` once (it downloads a browser for rendering; this is the
    step that looks stuck; give it a long timeout). Never let `npx` prompt mid-render:
    install first, render second.
@@ -58,8 +60,10 @@ because it is the loop's memory, and every skill in the kit writes to it.
 
 ## Stage 1: the brief
 
-Read `BUSINESS-TRUTH.md` if it exists: the business name, the offer, the phone number, the
-colours and the page address come from there, never retyped. If the file describes a
+`BUSINESS-TRUTH.md` lives in the folder the agent is running in, the person's project
+folder, and every skill in the kit reads and writes that one file. If it is not there, ask
+for the folder before anything else; never write a second copy somewhere else. Read it: the business name, the offer, the phone number, the colours and
+the page address come from there, never retyped. If the file describes a
 different business from the one the person is talking about, say so in one line, use
 nothing from it, and ask which is right before going on. If a fact the video needs is
 [PENDING] in the file (the WhatsApp number), the video cannot be `ready` until the person
@@ -74,7 +78,8 @@ media, no logo unless supplied.
 
 Ask at most three questions, one ask each, only ones that change the video (which product,
 which line of text, which colour if none is approved). Every other unknown becomes a labelled
-Assumption, not a fourth question. Never guess a fact you could read
+Assumption, not a fourth question. Show the contract and wait for the yes before the first
+render; the person approves the plan the same way they approve a build in the CRM skill. Never guess a fact you could read
 from a supplied file: fps, duration, orientation, colour tags of a source clip come from
 `media_audit.py`, and a fact it cannot read is `[PENDING: what would settle it]`. A fact
 about the brief that nobody gave is an Assumption, written down, not a stop.
@@ -96,7 +101,8 @@ about the brief that nobody gave is an Assumption, written down, not a stop.
 ## Stage 3: verify the file, not the exit code
 
 Run `media_audit.py <output> --decode --sha256`. `PASS` means the file decoded end to end
-with zero errors; `PROBED` means nothing was decoded and proves nothing. Then two checks
+with zero errors; `PROBED` means nothing was decoded and proves nothing. A receipt file is
+never overwritten by accident: name a new `--output` per run, or pass `--overwrite`. Then two checks
 only the person can do, carried as `[PENDING: you to confirm]` until they answer: "Play
 the file start to end. Does it play, and is the text readable?" and "Open these two frames:
 <paths>." Read `references/ffmpeg.md` when you transform, join or convert media.
@@ -123,4 +129,4 @@ now write the output path and the contract, dated.
 - Keep source media and earlier candidates. Deleting a source is never part of a render.
 
 Remotion has its own licence: free for individuals and small teams, paid above that. Say so
-once when a student builds for a company.
+once when a student builds for anyone but themselves, a client included.
