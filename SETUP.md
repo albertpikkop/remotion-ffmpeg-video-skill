@@ -1,7 +1,7 @@
 # Setup for this skill
 
 Everything for all three skills, per machine, is in the shared
-[SETUP.md in noguess](https://github.com/albertpikkop/noguess/blob/main/SETUP.md). This skill
+[SETUP.md in noguess](https://github.com/albertpikkop/noguess-prompt-skill/blob/main/SETUP.md). This skill
 needs, from that list:
 
 1. Node.js, the LTS installer from nodejs.org. Check: `node -v`.
