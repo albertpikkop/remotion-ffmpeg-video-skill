@@ -2,7 +2,7 @@
 
 A skill for making and verifying a first programmatic video with Remotion and FFmpeg, and for
 checking the file rather than trusting the render command. Third of three skills that share
-one method and one file: [noguess](https://github.com/albertpikkop/noguess) (the TCE + NHA
+one method and one file: [noguess](https://github.com/albertpikkop/noguess-prompt-skill) (the TCE + NHA
 loop) and [build-first-crm](https://github.com/albertpikkop/first-crm-skill). All three read
 and write `BUSINESS-TRUTH.md`, so the business is explained once.
 
@@ -15,7 +15,7 @@ review only) and asks at most three questions.
 ## Before you start
 
 Day-one setup for all three skills is in the shared
-[SETUP.md](https://github.com/albertpikkop/noguess/blob/main/SETUP.md). This repo's own
+[SETUP.md](https://github.com/albertpikkop/noguess-prompt-skill/blob/main/SETUP.md). This repo's own
 [SETUP.md](SETUP.md) lists what this skill needs: Node.js, FFmpeg, Python 3. The skill checks
 them first and prints the one install command for your system if one is missing, and it
 scaffolds the Remotion project itself, asking before every install.
@@ -25,7 +25,7 @@ scaffolds the Remotion project itself, asking before every install.
 **Claude Code** (one marketplace for the three skills):
 
 ```bash
-claude plugin marketplace add albertpikkop/noguess
+claude plugin marketplace add albertpikkop/noguess-prompt-skill
 ```
 
 ```bash
