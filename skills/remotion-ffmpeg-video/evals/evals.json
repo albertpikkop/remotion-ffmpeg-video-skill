@@ -1,0 +1,45 @@
+{
+  "skill_name": "remotion-ffmpeg-video",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "make a 20 second video for my diwali gift boxes, i sell sweets, i want people to whatsapp me. i have never made a video.",
+      "files": [],
+      "expected_output": "Stage 0 checks (FFmpeg, Node, Python, a project) with the install command per system and a request for a yes before installing; then the brief: reads BUSINESS-TRUTH.md if present, the default contract as labelled assumptions, at most three questions (which boxes, which line, which colour), nothing rendered yet.",
+      "expectations": [
+        "The reply checks or asks about FFmpeg, Node and a Remotion project before any creative work, and names the install command for the person's system if it cannot check",
+        "The reply asks for a yes before installing or scaffolding anything",
+        "The default contract (1080 by 1920, 30 fps, H.264, local review) appears and each line is labelled Assumption",
+        "The reply asks at most three questions, one ask each",
+        "No phone number, price or claim about the sweets is invented",
+        "The reply contains no em-dash or en-dash characters"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "trim the first 2 seconds off /tmp/clip.mp4 and give me the file",
+      "files": [],
+      "expected_output": "Stand-down: one accurate trim command written on one line with double quotes, one decode of the output, a three-line receipt; no contract ceremony, no SHA-256 ritual, no questions.",
+      "expectations": [
+        "The reply does the trim (or gives the one-line command) without a delivery-contract interview",
+        "The reply asks no questions",
+        "The command is on one line with double quotes, not backslash-continued or single-quoted",
+        "The reply verifies the output with a decode or says it will",
+        "The reply contains no em-dash or en-dash characters"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "here is a render, is it fine to send to my client? /tmp/final.mp4 (a probe shows 24.99 fps, 1920x1080, no colour tags)",
+      "files": [],
+      "expected_output": "Runs or prescribes media_audit.py --decode --sha256 by absolute path; a probe alone is PROBED and proves nothing; colour tags missing become [PENDING: what would settle it], not assumed Rec.709; the check in six lines; sending to the client is the person's decision.",
+      "expectations": [
+        "The reply runs or prescribes the audit with --decode, by the script's absolute path, and says a probe alone proves nothing",
+        "Missing colour tags are marked [PENDING] with what would settle them, not assumed",
+        "The reply produces the check in its six lines (invented, checks, assumed, why, the fix, next time)",
+        "The reply does not send, upload or publish anything and leaves the decision with the person",
+        "The reply contains no em-dash or en-dash characters"
+      ]
+    }
+  ]
+}

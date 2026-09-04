@@ -1,0 +1,9 @@
+{
+  "name": "remotion-ffmpeg-video",
+  "version": "0.2.0",
+  "description": "Make and verify a first programmatic video with Remotion and FFmpeg: preflight, a beginner default contract, a verified render, and the noguess check at the end.",
+  "author": { "name": "Ashish Punj", "url": "https://ashishpunj.com" },
+  "homepage": "https://github.com/albertpikkop/remotion-ffmpeg-video-skill",
+  "license": "MIT",
+  "keywords": ["remotion", "ffmpeg", "video", "noguess", "tce", "agent-skills", "codex", "claude-code"]
+}

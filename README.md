@@ -1,63 +1,69 @@
 # remotion-ffmpeg-video
 
-An agent skill for building, rendering and verifying programmatic video with Remotion and FFmpeg.
-This repository installs that one skill. It was first published as `growtricity-student-skills`;
-that name still redirects here.
+A skill for making and verifying a first programmatic video with Remotion and FFmpeg, and for
+checking the file rather than trusting the render command. Third of three skills that share
+one method and one file: [noguess](https://github.com/albertpikkop/noguess) (the TCE + NHA
+loop) and [build-first-crm](https://github.com/albertpikkop/first-crm-skill). All three read
+and write `BUSINESS-TRUTH.md`, so the business is explained once.
 
-**Level, plainly:** the rules inside are professional-grade (colour tags, frame timing, lossless
-intermediates, verified renders). You do not need to know those words; the agent does. What you
-need is the exercise below, which asks for a six-second video and checks the result the way a
-professional would.
+**Level, plainly:** the rules inside are professional-grade (colour tags, frame timing,
+verified renders). You do not need to know those words; the agent does. What you need is the
+exercise, which asks for a six-second video and checks the result the way a professional
+would. For a beginner the skill uses a default contract (1080 by 1920, 30 fps, H.264, local
+review only) and asks at most three questions.
 
-The First CRM skill lives separately at
-[albertpikkop/first-crm-skill](https://github.com/albertpikkop/first-crm-skill).
+## Before you start
 
-## Remotion + FFmpeg Video
-
-Build, edit, render and verify reproducible programmatic videos. The skill helps choose between
-Remotion, FFmpeg or a hybrid workflow and includes a deterministic media-audit script for
-inspecting and validating files.
+Day-one setup for all three skills is in the shared
+[SETUP.md](https://github.com/albertpikkop/noguess/blob/main/SETUP.md). This repo's own
+[SETUP.md](SETUP.md) lists what this skill needs: Node.js, FFmpeg, Python 3. The skill checks
+them first and prints the one install command for your system if one is missing, and it
+scaffolds the Remotion project itself, asking before every install.
 
 ## Install
 
+**Claude Code** (one marketplace for the three skills):
+
 ```bash
-npx skills add albertpikkop/remotion-ffmpeg-video-skill -g
+claude plugin marketplace add albertpikkop/noguess
 ```
 
-Remove `-g` if you want the skill only in the current project.
+```bash
+claude plugin install remotion-ffmpeg-video@ashishpunj
+```
+
+**Any agent, from GitHub:**
+
+```bash
+npx skills add albertpikkop/remotion-ffmpeg-video-skill
+```
+
+**Codex, by hand:** copy `skills/remotion-ffmpeg-video` into `~/.codex/skills/` on Mac or
+`%USERPROFILE%\.codex\skills\` on Windows.
 
 ## Use
 
-```text
-Use $remotion-ffmpeg-video to build and verify this video: [describe the video and provide its files].
-```
-
-## The method underneath
-
-The skill follows the TCE + NHA loop ([albertpikkop/noguess](https://github.com/albertpikkop/noguess)):
-it locks a delivery contract before rendering, marks any media fact it cannot read as [PENDING]
-instead of guessing, and ends with a check of the produced file against that contract. Install
-`noguess` first and both skills share one loop:
-
-```bash
-npx skills add albertpikkop/noguess
-```
-
-The same `npx skills add` commands work for Claude Code, Codex and Cursor.
+Say what you want in plain words: "make a 20 second video for my Diwali boxes". Codex users
+can type `Use $remotion-ffmpeg-video to make ...`. The skill reads `BUSINESS-TRUTH.md` for the
+facts, labels its assumptions, renders, verifies the file with a full decode, asks you to play
+it, and ends with the noguess check.
 
 ## Beginner exercise
 
-Follow [EXERCISE.md](EXERCISE.md) to create and verify a six-second vertical video without
-publishing it.
+[EXERCISE.md](EXERCISE.md): a six-second vertical video, verified, never uploaded.
 
-## Requirements
+## What is in the skill
 
-- An agent that supports `SKILL.md`: Codex, Claude Code or Cursor.
-- FFmpeg for media inspection and rendering.
-- Node.js and Remotion when the project uses Remotion.
+- `skills/remotion-ffmpeg-video/SKILL.md`: the stages. The machine first, the brief, the
+  build, verify the file, the handoff and the check.
+- `references/remotion.md` and `references/ffmpeg.md`: the composition rules and the media
+  commands, written on one line with double quotes so they paste into Windows and Mac alike.
+- `scripts/media_audit.py`: probes and decodes a file; `PASS` only after a clean full decode.
+- `evals/`: the test asks and the checks used to grade it.
 
-Rendering a video does not authorize upload, publication, scheduling or spend.
+## Requirements and licence
 
-## Licence
-
-MIT. See [LICENSE](LICENSE).
+Node.js, FFmpeg, Python 3, and an agent that reads `SKILL.md` (Codex, Claude Code, Cursor).
+Remotion has its own licence: free for individuals and small teams, paid above that; check it
+before company use. This skill is MIT (see [LICENSE](LICENSE)). Rendering a video does not
+authorize upload, publication, scheduling or spend.

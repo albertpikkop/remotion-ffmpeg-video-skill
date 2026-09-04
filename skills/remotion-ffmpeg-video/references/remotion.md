@@ -49,9 +49,19 @@ Use the repository's local CLI and lockfile, for example:
 
 ```bash
 npx remotion compositions src/index.tsx
-npx remotion still src/index.tsx CompositionId /absolute/path/frame.png --frame=0 --props=/absolute/path/props.json
-npx remotion render src/index.tsx CompositionId /absolute/path/candidate.mp4 --props=/absolute/path/props.json
 ```
+
+```bash
+npx remotion still src/index.tsx CompositionId "/absolute/path/frame.png" --frame=0 --props="/absolute/path/props.json"
+```
+
+```bash
+npx remotion render src/index.tsx CompositionId "/absolute/path/candidate.mp4" --props="/absolute/path/props.json"
+```
+
+Install dependencies with `npm install` before the first render and run `npx remotion browser
+ensure` once, so `npx` never prompts or downloads mid-render. Renders take minutes; run them
+with a long timeout. A composition with no live footage renders straight to H.264 once.
 
 For a programmatic renderer, bundle the entry point, call `selectComposition()` with the input
 props, then pass the resulting composition and the same props to `renderMedia()`. Use an explicit
@@ -68,9 +78,9 @@ Start with representative stills or a short frame range. A complete review set n
 - each factual or numerical card; and
 - the last spoken line and final frame.
 
-Inspect those images, then render the candidate. Increase concurrency only after measuring host
-memory and stability. Faster rendering is not useful if media decoding or browser memory becomes
-nondeterministic.
+Inspect those images, then render the candidate. The default concurrency already uses every
+core; on an 8 GB laptop that is what runs out of memory. If a render is unstable, lower the
+concurrency. Faster rendering is not useful if the browser memory becomes nondeterministic.
 
 ## Hybrid boundary with FFmpeg
 

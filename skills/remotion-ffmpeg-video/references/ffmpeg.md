@@ -7,9 +7,16 @@ are patterns: preserve the user's chosen output and derive parameters from the d
 
 Generate machine-readable facts:
 
+Commands are written on one line with double quotes so they paste into PowerShell, cmd and a
+Mac terminal. `SKILL_DIR` means this skill's own folder (the script sits next to SKILL.md); on
+Windows replace `python3` with `py -3`.
+
 ```bash
-ffprobe -v error -show_format -show_streams -show_chapters -of json /absolute/path/input.mov
-python3 scripts/media_audit.py /absolute/path/input.mov --output /absolute/path/input.audit.json
+ffprobe -v error -show_format -show_streams -show_chapters -of json "/absolute/path/input.mov"
+```
+
+```bash
+python3 "SKILL_DIR/scripts/media_audit.py" "/absolute/path/input.mov" --output "/absolute/path/input.audit.json"
 ```
 
 Check stream order, start times, duration, average and real frame rates, time base, sample/display
@@ -19,8 +26,11 @@ rate, channels, and layout. Treat missing colour metadata as unknown, not Rec.70
 Run a full decode when corruption or final readiness matters:
 
 ```bash
-python3 scripts/media_audit.py /absolute/path/candidate.mp4 --decode --sha256 --output /absolute/path/candidate.audit.json
+python3 "SKILL_DIR/scripts/media_audit.py" "/absolute/path/candidate.mp4" --decode --sha256 --output "/absolute/path/candidate.audit.json"
 ```
+
+`PASS` means the whole file decoded with zero errors. `PROBED` means no decode was run and
+proves nothing about playback. `FAIL` lists the decode errors.
 
 ## Safe transform choices
 
@@ -44,11 +54,7 @@ python3 scripts/media_audit.py /absolute/path/candidate.mp4 --decode --sha256 --
 For a conventional web/social H.264 delivery after colour is already correct, a starting shape is:
 
 ```bash
-ffmpeg -n -i /absolute/path/master.mov \
-  -map '0:v:0' -map '0:a:0?' \
-  -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p \
-  -c:a aac -b:a 192k -movflags +faststart \
-  /absolute/path/delivery-v1.mp4
+ffmpeg -n -i "/absolute/path/master.mov" -map "0:v:0" -map "0:a:0?" -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart "/absolute/path/delivery-v1.mp4"
 ```
 
 Do not add Rec.709 tags to that command unless the signal was inspected and, when necessary,
@@ -75,9 +81,14 @@ into a shell command; pass arguments as an array from scripts.
 Verify at least:
 
 ```bash
-ffmpeg -v error -i /absolute/path/candidate.mp4 -map '0:v:0?' -map '0:a:0?' -f null -
-ffprobe -v error -show_format -show_streams -of json /absolute/path/candidate.mp4
+ffmpeg -v error -i "/absolute/path/candidate.mp4" -map "0:v:0?" -map "0:a:0?" -f null -
 ```
+
+```bash
+ffprobe -v error -show_format -show_streams -of json "/absolute/path/candidate.mp4"
+```
+
+A clean decode prints nothing. Any printed line is an error even when the exit code is 0.
 
 Also inspect first, middle, transition, factual-card, and final frames. Record the exact command,
 tool version, output SHA-256, decode result, video/audio starts and duration delta, resolution, fps,

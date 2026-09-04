@@ -1,0 +1,118 @@
+---
+name: remotion-ffmpeg-video
+description: >-
+  Make and verify a first programmatic video with Remotion and FFmpeg, and check the
+  file, not the exit code. Use when someone wants a video made for their business or
+  product ("make a 30 second video for my diwali boxes", "ek chhota video banao", "a
+  reel", "a short", "an ad from my photos"), wants a video trimmed, joined, converted or
+  fixed, or wants a render checked. Starts with a preflight that gets a fresh machine
+  ready (FFmpeg, Node, Python, a Remotion project), reads BUSINESS-TRUTH.md for the
+  facts, uses a beginner default contract (1080 by 1920, 30 fps, H.264, local review
+  only) as labelled assumptions, asks at most three questions, tells before installing
+  or writing into an existing project, verifies the produced file with a full decode,
+  and ends with the noguess check. Not for story or creative direction alone. Never
+  uploads, publishes, schedules or spends money.
+---
+
+# Remotion + FFmpeg Video
+
+## Outcome
+
+A video file the person can play, built so it can be rebuilt: the inputs, the timeline, the
+render settings and the verification are all written down. A render is a local file. It is
+not permission to upload, publish, schedule, replace anything, or spend money. Answer in the
+language the person wrote in. No em-dashes in text you write.
+
+## When to stand down
+
+A small, reversible edit the person wants now (trim two seconds, swap a title, convert a
+file): do it, verify the output with one decode, and give a three-line receipt. The full
+contract below is for a delivery render or a first build.
+
+## Stage 0: the machine, before the video
+
+Run these checks and stop at the first gap with the one install command for their system
+(the full list is in `SETUP.md` at the repo root). Ask before installing anything: "I will
+install X (about Y MB). Ok?"
+
+1. `ffmpeg -version` and `ffprobe -version`. Missing: Mac `brew install ffmpeg`; Windows
+   `winget install Gyan.FFmpeg`, then reopen the terminal.
+2. `node -v`. Missing: nodejs.org, the LTS installer.
+3. Python: `python3 --version` on Mac, `py -3 --version` on Windows. Missing on Windows:
+   `winget install Python.Python.3.12`.
+4. A Remotion project. If the folder has no `package.json`, scaffold one without prompts:
+   `npx create-video@latest <folder> --blank`, then `npm install` inside it, then
+   `npx remotion browser ensure` once (it downloads a browser for rendering; this is the
+   step that looks stuck; give it a long timeout). Never let `npx` prompt mid-render:
+   install first, render second.
+5. The audit script sits next to this file. Call it by its absolute path:
+   `python3 "<this skill's folder>/scripts/media_audit.py"` on Mac,
+   `py -3 "<this skill's folder>\scripts\media_audit.py"` on Windows.
+
+Write every command on one line, with double quotes, so it pastes into PowerShell, cmd and
+a Mac terminal alike. Before writing into an existing project, list which files will change
+and wait for a yes.
+
+## Stage 1: the brief
+
+Read `BUSINESS-TRUTH.md` if it exists: the business name, the offer, the phone number, the
+colours and the page address come from there, never retyped. Then the delivery contract.
+For a beginner who did not specify, use this contract and label every line Assumption:
+
+```text
+Canvas 1080 by 1920 (vertical, phone). 30 fps. 6 to 30 seconds. H.264 MP4, no audio unless
+they gave some. Local review only. Text and simple shapes from the business facts; no stock
+media, no logo unless supplied.
+```
+
+Ask at most three questions, one ask each, only ones that change the video (which product,
+which line of text, which colour if none is approved). Never guess a fact you could read
+from a supplied file: fps, duration, orientation, colour tags of a source clip come from
+`media_audit.py`, and a fact it cannot read is `[PENDING: what would settle it]`. A fact
+about the brief that nobody gave is an Assumption, written down, not a stop.
+
+## Stage 2: build
+
+- Give the composition a stable ID and explicit width, height, fps and duration in frames.
+  Changing content goes in props. One master clock: seconds in the data, frames once at the
+  boundary. Read `references/remotion.md` for the composition rules.
+- Every frame is a pure result of frame number, props and locked assets. Name the font and
+  load it deliberately; no machine-local substitution.
+- Render stills first: the first frame, one frame per text card, the last frame. Look at
+  them, or if you cannot see images, print their absolute paths and ask the person to look.
+- A graphics-only composition renders once, straight to H.264. A mezzanine is only for
+  footage that FFmpeg will re-encode afterwards. If a render is unstable or runs out of
+  memory, lower the concurrency; do not raise it.
+- Renders take minutes. Run them with a long timeout, and say so before starting.
+
+## Stage 3: verify the file, not the exit code
+
+Run `media_audit.py <output> --decode --sha256`. `PASS` means the file decoded end to end
+with zero errors; `PROBED` means nothing was decoded and proves nothing. Then two checks
+only the person can do, carried as `[PENDING: you to confirm]` until they answer: "Play
+the file start to end. Does it play, and is the text readable?" and "Open these two frames:
+<paths>." Read `references/ffmpeg.md` when you transform, join or convert media.
+
+## Handoff and the check
+
+Give: the output path, the composition ID and props, the delivery contract as met, the
+audit receipt (decode result, duration, resolution, fps, SHA-256), the two frame paths, and
+one word: `ready`, `not ready` or `blocked`. State that no upload, publish or spend happened.
+
+Then run the check from the `noguess` skill on the candidate against the contract, in its
+shape: Invented, Checks (met / not met / [PENDING]), Assumed without being told, Why, The
+fix, Next time. If `noguess` is not installed, run those six lines inline. Write the Next
+time line into `BUSINESS-TRUTH.md` under Prompting rules learned, and under What exists
+now write the output path and the contract, dated.
+
+## Rules of media that never bend
+
+- Rec.709 tags do not convert HDR pixels; perform and verify a real transform when needed.
+- Never hide a sync error with separate video and audio padding; repair the shared timeline.
+- The concat demuxer only for stream-compatible files; otherwise the concat filter and one
+  re-encode. Never byte-concatenate media.
+- New versioned output by default. Overwrite only disposable generated files.
+- Keep source media and earlier candidates. Deleting a source is never part of a render.
+
+Remotion has its own licence: free for individuals and small teams, paid above that. Say so
+once when a student builds for a company.
