@@ -1,6 +1,6 @@
 {
   "name": "remotion-ffmpeg-video",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Make and verify a first programmatic video with Remotion and FFmpeg: preflight, a beginner default contract, a verified render, and the noguess check at the end.",
   "author": {
     "name": "Ashish Punj",

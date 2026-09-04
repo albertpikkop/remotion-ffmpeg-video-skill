@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.2.0, 4 September 2026
+## v0.3.0, 4 September 2026
 
 Rewritten after a cold review of the skill and a second cold review of the three-skill journey.
 
@@ -17,6 +17,10 @@ Rewritten after a cold review of the skill and a second cold review of the three
 - One direct H.264 render for graphics-only work; lower concurrency when unstable.
 - The check in the noguess shape with an inline fallback; Next time into the truth file.
 - Exercise: a named font, a hex colour, a duration window, and "you watched it".
+
+## v0.2.0, 3 September 2026
+
+The video skill kept separate from the CRM skill (its own repo).
 
 ## v0.1.0, 3 September 2026
 
