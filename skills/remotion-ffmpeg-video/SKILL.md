@@ -44,6 +44,7 @@ or come back in March having forgotten all of it. None of that is a mistake to c
 | `PLAN-v0.md` | their own answers, sorted, not yet attacked | continue from it; never ask the ten questions again |
 | `PLAN-v1.md` | attacked and answered, no outside data yet | continue from it |
 | `PLAN-v2-BLUEPRINT.md` | changed by answers from real strangers | build from it, and say so |
+| `PLAN-v3-BLUEPRINT.md`, v4... | the Blueprint changed later, on new evidence | the highest number is current; read that one |
 | `BUSINESS-TRUTH.md` | the facts every building skill reads | read it, ask only what it does not answer |
 
 Four rules, the same in every skill in this kit:
@@ -60,7 +61,8 @@ Four rules, the same in every skill in this kit:
    the same message is how a beginner ends up answering two different interviews.
 4. **Facts live in one file.** `BUSINESS-TRUTH.md`, in the folder the agent is running
    in. Plans, versions and thinking live in the `PLAN-` files. Never a second copy of
-   either, anywhere.
+   either, anywhere. A plan under any other name (`business-plan.md`, notes, a pasted
+   paragraph) still counts: read it, never ask what it already answers.
 
 If the folder and the person disagree, the person is right and the file is old. Say which
 line you are changing, change it, carry on.
